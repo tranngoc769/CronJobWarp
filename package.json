@@ -9,12 +9,14 @@
     "https": "^1.0.0",
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.2",
+    "opencollective": "^1.0.3",
     "zlib": "^1.0.5"
   },
   "devDependencies": {},
   "scripts": {
+    "postinstall": "opencollective-postinstall",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC"

@@ -1,6 +1,6 @@
 const express = require('express');
 const cron = require('node-cron')
-const port =  process.env.PORT || 8080;
+const port =  process.env.PORT || 3000;
 const warp = require('./buffwarp');
 cron.schedule('* * * * *', () => {
     warp.show();
