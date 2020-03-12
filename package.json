@@ -10,6 +10,7 @@
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.2",
     "opencollective": "^1.0.3",
+    "opencollective-postinstall": "^2.0.2",
     "zlib": "^1.0.5"
   },
   "devDependencies": {},
