@@ -13,9 +13,12 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {},
-  "scripts": {
+  "scripts": {"postinstall": "opencollective-postinstall",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
+  },
+  "collective": {
+    "url": "https://opencollective.com/webpack"
   },
   "author": "",
   "license": "ISC",
