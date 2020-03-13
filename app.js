@@ -7,14 +7,11 @@ var bodyParser = require("body-parser");
 // INIT
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
-
-// CRON
-var CronJob = require('cron').CronJob;
-var job = new CronJob('* * * * *', function() {
-    warp.show();
-    warp.init();
-}, null, true);
-job.start();
+// // CRON
+var cron = require('node-cron');
+cron.schedule('* * * * *', () => {
+    warp.runAllID();
+});
 
 // VIEWS ENGINE
 app.set('views', path.join(__dirname,'views'));

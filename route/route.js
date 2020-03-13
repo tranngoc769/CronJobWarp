@@ -7,7 +7,21 @@ module.exports = function(app) {
         })
     app.post('/',async function (req, res) {
         var id = req.body.id;
-        saveID.writeID(id);
-        res.render('indexPost')
+        var existed = saveID.writeID(id);
+        if (existed == 0)
+        {
+
+            res.render('indexPost',
+            {
+                title : "Đã tiếp nhận thông tin. Chờ đợi là hạnh phúc"
+            })
+        }
+        else
+        {
+            res.render('indexPost',
+            {
+                title : "ID đã tồn tại nha"
+            })
+        }
         })
 }

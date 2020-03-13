@@ -2,14 +2,14 @@
 //Copy User ID From: Setting/More Setting/Diagnostic/ID
 const referrer = "f9aa3824-e07b-411d-9fef-1e74cab061a7";
 const timeToLoop = 10; 
-// time sleep, currently rate limit might be apply to per min per ip
 var colors = require('colors');
+var readfile = require('./models/saveID');
 function getTime()
 {
     let ts = Date.now();
     let date_ob = new Date(ts);
     let hour = date_ob.getHours();
-    let min = date_ob.getMinutes() + 1;
+    let min = date_ob.getMinutes();
     let sec = date_ob.getSeconds()
     let stringTime =  hour + ":" + min + ":" + sec;
     return stringTime;
@@ -31,7 +31,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function run() {
+async function run(id) {
     return new Promise(resolve => {
 
         const install_id = genString(11);
@@ -41,7 +41,7 @@ async function run() {
             key: `${genString(43)}=`, 
             install_id: install_id,
             fcm_token: `${install_id}:APA91b${genString(134)}`,
-            referrer: referrer,
+            referrer: id,
             warp_enabled: false,
             tos: new Date().toISOString().replace("Z", "+07:00"),
             type: "Android",
@@ -88,6 +88,7 @@ async function run() {
 }
 
 async function loading() {
+    console.log('\nEach ID will wait 1 minute to avoid spam server'.yellow);
     process.stdout.write('Cron-job start each minutes hihi: '.yellow.italic);
     for (var i = 0;i<5;i++)
     {
@@ -97,36 +98,33 @@ async function loading() {
     console.log('\nWaiting for next minute'.gray);
 
 }
-async function init() {
+async function runAllID() 
+{
+    var lines = readfile.readAll();
+    lines.forEach((line) => {
+        if(line!='')
+        {
+            init(line);
+        }
+    });
+}
+async function init(id) {
+    show(id);
     for (let index = 0; index < timeToLoop; index++) {
-        if (await run()) {
-            console.log('    Success '+'+ 1GB'.yellow.italic+' at '+getTime().yellow.italic);
+        if (await run(id)) {
+            console.log('    '+id.yellow+' success '+'+ 1GB'.yellow.italic+' at '+getTime().yellow.italic);
         } else {
-            process.stdout.write('    Done!'.blue+' Waiting for next cron to avoid being spammed!\n')
-            process.stdout.write('                        Tran Ngoc                      \n'.blue)
-            
+            process.stdout.write('    '+id.blue+ ' Done!\n'.blue)
             return;
-            // Stop luon, cho cron-job khoi dong lai
-            // for (let r_index = 0; r_index < retryTimes; r_index++) {
-            //     await sleep(sleepSeconds * 1000);
-            //     if (await run()) {
-            //         break;
-            //     } else {
-            //         if (r_index == retryTimes -1) {
-            //             return;
-            //         }
-            //     }
-            // }
         }
     }
 }
-function show()
+function show(id)
 {
-    console.log('Started cron-job at '.yellow.italic + getTime());
+    console.log('Started cron-job at '.yellow.italic + getTime() + ' for ID : ' + id.yellow);
 }
 module.exports =
 {
-    init,
-    show,
+    runAllID,
     loading
 }
