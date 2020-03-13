@@ -114,7 +114,7 @@ async function init(id) {
         if (await run(id)) {
             console.log('    '+id.yellow+' success '+'+ 1GB'.yellow.italic+' at '+getTime().yellow.italic);
         } else {
-            process.stdout.write('    '+id.blue+ ' Done!\n'.blue)
+            process.stdout.write('    '+id.blue+ ' is done!\n'.blue)
             return;
         }
     }
