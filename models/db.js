@@ -18,7 +18,7 @@ function end()
 {
     conn.end(function (err){
         if (err) throw err.stack;
-        console.log('End connection success');
+        console.log('End connection  success');
     });
 }
 async function querry (sql){
