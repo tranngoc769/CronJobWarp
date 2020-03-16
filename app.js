@@ -9,12 +9,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 // // CRON
 var cron = require('node-cron');
-cron.schedule('* * * * * *', () => {
-    // warp.runAllID();
-    
+cron.schedule('* * * * *', () => {
+    warp.runAllID();
 });
 
-warp.testing();
+warp.connectDB();
+
 // VIEWS ENGINE
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine','ejs');

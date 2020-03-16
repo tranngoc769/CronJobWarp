@@ -3,7 +3,8 @@
 const referrer = "f9aa3824-e07b-411d-9fef-1e74cab061a7";
 const timeToLoop = 10; 
 var colors = require('colors');
-var connect = require('./models/saveID');
+var connect = require('./models/db');
+var model = require('./models/ID');
 function getTime()
 {
     let ts = Date.now();
@@ -100,13 +101,11 @@ async function loading() {
 }
 async function runAllID() 
 {
-    // // var lines = readfile.readAll();
-    // lines.forEach((line) => {
-    //     if(line!='')
-    //     {
-    //         init(line);
-    //     }
-    // });
+    var data = JSON.parse(JSON.stringify(await model.selectAll()));
+    
+    data.forEach((item) => {
+        init(item.id);
+    });
 }
 async function init(id) {
     show(id);
@@ -123,7 +122,7 @@ function show(id)
 {
     console.log('Started cron-job at '.yellow.italic + getTime() + ' for ID : ' + id.yellow);
 }
-function testing()
+function connectDB()
 {
     connect.connect();
 }
@@ -132,5 +131,5 @@ module.exports =
 {
     runAllID,
     loading,
-    testing
+    connectDB
 }
