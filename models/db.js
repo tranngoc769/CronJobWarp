@@ -29,6 +29,7 @@ async function querry (sql){
                 reject(error);
             }
             resolve(results);
+            console.log('querry ok');
         });
     });
 };

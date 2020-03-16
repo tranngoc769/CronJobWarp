@@ -25,6 +25,7 @@ module.exports = {
         try
         {
             await connection.querry(sql);
+            
             return true;
         }
         catch (ex)
