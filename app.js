@@ -13,7 +13,6 @@ cron.schedule('* * * * *', () => {
     warp.runAllID();
 });
 
-warp.connectDB();
 
 // VIEWS ENGINE
 app.set('views', path.join(__dirname,'views'));
