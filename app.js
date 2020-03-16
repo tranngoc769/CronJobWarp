@@ -11,10 +11,10 @@ app.use(express.static("public"));
 var cron = require('node-cron');
 cron.schedule('* * * * * *', () => {
     // warp.runAllID();
-    warp.testing();
     
 });
 
+warp.testing();
 // VIEWS ENGINE
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine','ejs');
