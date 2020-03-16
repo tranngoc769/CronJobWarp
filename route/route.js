@@ -11,7 +11,7 @@ module.exports = function (app) {
         if (existed == true) {
             res.render('indexPost',
                 {
-                    title: "Đã tiếp nhận thông tin. Chờ đợi là hạnh phúc"
+                    title: "Đã tiếp nhận thông tin. Chờ đợi là hạnh phúc !"
                 })
         }
         else {
