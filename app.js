@@ -9,20 +9,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 // // CRON
 var cron = require('node-cron');
-<<<<<<< HEAD
 cron.schedule('* * * * *', () => {
     warp.runAllID();
 });
-
-
-=======
-cron.schedule('* * * * * *', () => {
-    // warp.runAllID();
-    warp.testing();
-    
-});
-
->>>>>>> parent of 91bbb42... bao tri
 // VIEWS ENGINE
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine','ejs');
