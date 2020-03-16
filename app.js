@@ -9,8 +9,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 // // CRON
 var cron = require('node-cron');
-cron.schedule('* * * * *', () => {
-    warp.runAllID();
+cron.schedule('* * * * * *', () => {
+    // warp.runAllID();
+    warp.testing();
+    
 });
 
 // VIEWS ENGINE

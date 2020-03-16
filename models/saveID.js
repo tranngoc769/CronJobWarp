@@ -1,46 +1,41 @@
-var fs = require('fs');
-function readAll()
+const mysql = require('mysql');
+
+var conn = mysql.createConnection({
+        host: '45.252.248.16',
+        port: '3306',
+        user: 'vesinhv1',
+        password: 'quang7699',
+        database: 'vesinhv1_cron'
+});
+function connect()
 {
-    try {
-        const data = fs.readFileSync('./id', 'UTF-8');
-        const lines = data.split(/\r?\n/);
-        // lines.forEach((line) => {
-        //     listID.push(line);
-        // });
-        return lines;
-    } catch (err) {
-        console.error(err);
-    }
+    conn.connect(function (err){
+        if (err) throw err.stack;
+        console.log('Connection success');
+    });
 }
-function writeID(id)
+function end()
 {
-    var isExist  = 0;
-    try {
-        const data = fs.readFileSync('./id', 'UTF-8');
-        const lines = data.split(/\r?\n/);
-        lines.forEach((line) => {
-            if (line == id)
-            {
-                isExist = 1;
-                return 1;
+    conn.end(function (err){
+        if (err) throw err.stack;
+        console.log('End connection success');
+    });
+}
+async function querry (sql){
+    return new Promise((resolve, reject) => {
+        conn.query(sql, (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                reject(error);
             }
+            resolve(results);
         });
-        if ( isExist == 0)
-        {
-            fs.appendFile('./id',`${id}\n` , function (err) {
-                if (err) throw err;
-                console.log('Saved!');
-              });
-              return 0;
-        }
-        return 1;
-    } catch (err) {
-        console.error(err);
-    }
-    
-}
+    });
+};
+
 module.exports = 
 {
-    writeID,
-    readAll
+    end,
+    connect,
+    querry
 }
