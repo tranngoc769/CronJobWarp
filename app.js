@@ -26,4 +26,5 @@ route(app);
 app.listen(port, () => {
     console.log('Server runing on : '+ `${port}`.yellow);
     warp.loading();
+    warp.connectDB();
 });
