@@ -4,7 +4,7 @@ var conn = mysql.createConnection({
         host: '45.252.248.16',
         port: '3306',
         user: 'vesinhv1',
-        password: 'tranngoc7699',
+        password: 'quang7699',
         database: 'vesinhv1_cron'
 });
 function connect()
